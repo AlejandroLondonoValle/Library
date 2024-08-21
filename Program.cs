@@ -1,4 +1,17 @@
+using Library.DataBase;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+// conexion con la base de datos
+
+
+
+builder.Services.AddDbContext<AplicationDbContext>(options=> options.UseMySql(
+    builder.Configuration.GetConnectionString("conexion_db_Library"),
+    ServerVersion.Parse("8.0.2-mysql")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
