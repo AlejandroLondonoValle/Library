@@ -11,5 +11,6 @@ public class User
     public string TypeDocument { get; set; }
     public string NumberDocument { get; set; }
     public string Name { get; set; }
+    public string LastName { get; set; }
 
 }
