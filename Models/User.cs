@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Library.Models
+namespace Library.Models;
+
+public class User
 {
-    public class User
-    {
-        
-    }
+    public int Id { get; set; }
+
 }
