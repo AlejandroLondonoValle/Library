@@ -8,5 +8,6 @@ namespace Library.Models;
 public class User
 {
     public int Id { get; set; }
+    public string TypeDocument { get; set; }
 
 }
