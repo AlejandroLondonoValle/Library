@@ -1,0 +1,40 @@
+@model List<Library.Models.User>;
+
+<div class="text-center">
+    <h1 class="display-4">¡Estos son Nuestros useres!</h1><br>
+
+
+    <div class="container">
+        <br><hr><br>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            @foreach (var user in Model)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img src="" class="card-img-top" style="height: 375px; object-fit: cover;"
+                        alt="@user.Name">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@user.Name @user.LastName</h5>
+                        <p class="card-text">
+                            <span>@user.Address</span><br>
+                            <span>@user.PhoneNumber</span><br>
+                            @user.Role
+                        </p>
+                        <a class="btn btn-warning" asp-controller="user" asp-action="Editar" asp-route-id="@user.Id">Editar</a>
+                        <a class="btn btn-danger" asp-controller="user" asp-action="Eliminar" asp-route-id="@user.Id" onclick="confirmar()">Eliminar</a>
+        
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmar()
+        {
+            return confirm("¿Estás seguro de Eliminar este user?");
+        }
+    </script>
+};
+ 

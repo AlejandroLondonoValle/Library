@@ -40,6 +40,9 @@ public class AplicationDbContext : DbContext
             .HasPrincipalKey(b => b.ISBN);
 
         // Configuración adicional según sea necesario
+
+
+        modelBuilder.Entity<User>().ToTable("User");
     }
 
 }
