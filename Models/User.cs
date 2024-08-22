@@ -16,4 +16,6 @@ public class User
     public string PhoneNumber { get; set; }
     public string Role { get; set; }
 
+    public ICollection<Loan> Loans { get; set; } // Propiedad de navegación
+
 }
