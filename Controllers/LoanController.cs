@@ -69,15 +69,22 @@ namespace Library.Controllers;
             loan.FinishDate=updateLoan.FinishDate;
 
 
-
-
             await _context.SaveChangesAsync();
             return Ok("Prestamo Actualizado correctamente");
         }
 
-
-
-
+             [HttpGet]
+        public async Task<IActionResult>Deleteloan(int id)
+        {
+            var loan= await _context.Loans.FindAsync(id);
+            if (loan == null)
+            {
+                return NotFound("Libro no encontrado");
+            }
+            _context.Loans.Remove(loan);
+            await _context.SaveChangesAsync();
+            return Ok("Prestamo eliminado correctamente");
+        }
 
     }
 
