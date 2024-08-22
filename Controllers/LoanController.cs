@@ -63,6 +63,14 @@ namespace Library.Controllers;
             }
 
             loan.State = updateLoan.State;
+            loan.BookISBN=updateLoan.BookISBN;
+            loan.IdUser= updateLoan.IdUser;
+            loan.StartDate=updateLoan.StartDate;
+            loan.FinishDate=updateLoan.FinishDate;
+
+
+
+
             await _context.SaveChangesAsync();
             return Ok("Prestamo Actualizado correctamente");
         }
