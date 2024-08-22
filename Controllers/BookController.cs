@@ -29,10 +29,10 @@ public class BookController : Controller
 
     }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public IActionResult Index()
+    {
+        return View();
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
@@ -58,7 +58,7 @@ public class BookController : Controller
 
 
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateBook([FromBody] Book updateBook)
     {
@@ -79,7 +79,7 @@ public class BookController : Controller
         return Ok("Libro Actualizado correctamente");
     }
 
-    
+
     [HttpDelete]
     public async Task<IActionResult> DeleteBook(string isbn)
     {

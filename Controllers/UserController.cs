@@ -30,7 +30,7 @@ namespace Library.Controllers
         [HttpGet]
         public IActionResult Dashboard()
         {
-            var user = _context.Users.ToList(); 
+            var user = _context.Users.ToList();
             return View(user);
         }
 
