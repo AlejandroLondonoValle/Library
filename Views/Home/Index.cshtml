@@ -2,7 +2,40 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<header class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">¡Bienvenido a Nuestra Librería!</h1>
+        <p class="lead">Descubre una amplia colección de libros y empieza tu aventura literaria hoy mismo.</p>
+    </div>
+</header>
+
+<section class="py-5 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="https://via.placeholder.com/500x300?text=Iniciar+Sesión" class="card-img-top"
+                        alt="Iniciar Sesión">
+                    <div class="card-body">
+                        <h5 class="card-title">Iniciar Sesión</h5>
+                        <p class="card-text">¿Ya tienes una cuenta? Inicia sesión para acceder a tu perfil y explorar
+                            nuestras ofertas exclusivas.</p>
+                        <a href="login.html" class="btn btn-primary">Iniciar Sesión</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="https://via.placeholder.com/500x300?text=Registrarse" class="card-img-top"
+                        alt="Registrarse">
+                    <div class="card-body">
+                        <h5 class="card-title">Registrarse</h5>
+                        <p class="card-text">Crea una cuenta para empezar a explorar, guardar tus libros favoritos y
+                            mucho más.</p>
+                        <a href="register.html" class="btn btn-success">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
