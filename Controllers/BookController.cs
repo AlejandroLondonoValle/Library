@@ -71,7 +71,7 @@ namespace Library.Controllers;
             await _context.SaveChangesAsync();
             return Ok ("Libro Actualizado correctamente");
         }
-        [HttpDelete]
+        [HttpGet]
         public async Task<IActionResult>DeleteBook(string isbn)
         {
             var book = await _context.Books.FirstOrDefaultAsync(b=> b.ISBN== isbn);
