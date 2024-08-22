@@ -18,13 +18,13 @@
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
                                     </div>
                                     <form class="user" action="@Url.Action("Index","Login")" method="post" >
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" name="correo" placeholder="Email" value="Konoe@gmail.com">
+                                        <div class="form-group pb-3">
+                                            <input type="email" class="form-control form-control-user" name="correo" placeholder="Email" >
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="clave" placeholder="Password" value="123">
+                                        <div class="form-group pb-3">
+                                            <input type="password" class="form-control form-control-user" name="clave" placeholder="Password" >
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             @{if (ViewBag.Error != null)
                                                 {
                                                     <div class="alert alert-danger" role="alert">

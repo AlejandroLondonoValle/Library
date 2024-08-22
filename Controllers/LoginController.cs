@@ -15,6 +15,11 @@ namespace Library.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
 
         // POST: /Login/Index
         [HttpPost]
@@ -24,7 +29,7 @@ namespace Library.Controllers
             if (correo == "Konoe@gmail.com" && clave == "123")
             {
                 // Redirige a otra acción o vista
-                return RedirectToAction("Success");
+                return RedirectToAction("Dashboard");
             }
             else
             {
