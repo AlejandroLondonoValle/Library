@@ -12,13 +12,29 @@ namespace Library.Controllers
     public class UserController : Controller
     {
 
+        private readonly AplicationDbContext _context;
+
+        public UserController(AplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
+        // GET: /User/Index
         [HttpGet]
-        public IActionResult Dashboard()
+        public IActionResult Index()
         {
             return View();
         }
 
-          // POST: /Login/Index
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            var user = _context.Users.ToList(); 
+            return View(user);
+        }
+
+        // POST: /User/Index
         [HttpPost]
         public IActionResult Index(string correo, string clave)
         {
@@ -33,12 +49,6 @@ namespace Library.Controllers
                 ViewBag.Error = "Credenciales incorrectas.";
                 return View();
             }
-        }
-        private readonly AplicationDbContext _context;
-
-        public UserController(AplicationDbContext context)
-        {
-            _context = context;
         }
 
         [HttpPost]
@@ -77,7 +87,7 @@ namespace Library.Controllers
             return Ok("User updated successfully");
         }
 
-        [HttpDelete]
+        [HttpGet]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -88,15 +98,15 @@ namespace Library.Controllers
 
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-            return Ok("User deleted successfully");
+            return RedirectToAction(nameof(Dashboard));
         }
 
 
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            List<User> lista = await _context.Users.ToListAsync();
-            return View(lista);
+            List<User> list = await _context.Users.ToListAsync();
+            return View(list);
         }
     }
 }

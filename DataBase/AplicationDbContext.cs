@@ -42,7 +42,25 @@ public class AplicationDbContext : DbContext
         // Configuración adicional según sea necesario
 
 
-        modelBuilder.Entity<User>().ToTable("User");
+         modelBuilder.Entity<User>(tb => {
+                tb.HasKey(col => col.Id);
+
+                tb.Property(col => col.Id).UseMySqlIdentityColumn().ValueGeneratedOnAdd();
+                tb.Property(col => col.Name).HasMaxLength(50);
+                tb.Property(col => col.LastName).HasMaxLength(50);
+                tb.Property(col => col.Address).HasMaxLength(100);
+                tb.Property(col => col.PhoneNumber).HasMaxLength(50);
+                tb.Property(col => col.NumberDocument).HasMaxLength(50);
+                tb.Property(col => col.Role).HasMaxLength(50);
+                tb.Property(col => col.TypeDocument).HasMaxLength(50);
+
+                //tb.ToTable("Jugadores"); //Cambiamos el nombre de la tabla a Jugadores en lugar de Jugador
+
+            });
+
+
+
+        modelBuilder.Entity<User>().ToTable("Users");
     }
 
 }
