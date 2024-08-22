@@ -58,9 +58,26 @@ public class AplicationDbContext : DbContext
 
             });
 
-
-
         modelBuilder.Entity<User>().ToTable("Users");
+
+
+
+
+         modelBuilder.Entity<Book>(tb => {
+                tb.HasKey(col => col.Id);
+
+                tb.Property(col => col.Id).UseMySqlIdentityColumn().ValueGeneratedOnAdd();
+                tb.Property(col => col.Title).HasMaxLength(50);
+                tb.Property(col => col.Category).HasMaxLength(50);
+                tb.Property(col => col.Author).HasMaxLength(100);
+                tb.Property(col => col.ISBN).HasMaxLength(50);
+                tb.Property(col => col.State).HasMaxLength(50);
+
+                //tb.ToTable("Jugadores"); //Cambiamos el nombre de la tabla a Jugadores en lugar de Jugador
+
+            });
+            
+        modelBuilder.Entity<Book>().ToTable("Books");
     }
 
 }

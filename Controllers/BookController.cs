@@ -1,96 +1,86 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Library.DataBase;
 using Library.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
-namespace Library.Controllers;
-
-[Route("[controller]")]
-public class BookController : Controller
+namespace Library.Controllers
 {
-    private readonly AplicationDbContext _context;
-
-    public BookController(AplicationDbContext context)
+    [Route("books")] // Ruta base para todas las acciones
+    public class BookController : Controller
     {
-        _context = context;
-    }
-    public IActionResult Read()
-    {
-        var book = _context.Books.ToList();
-        return View(book);
+        private readonly AplicationDbContext _context;
 
-    }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-
-    [HttpPost]
-    public async Task<IActionResult> CreateBook([FromBody] Book book)
-    {
-        _context.Books.Add(book);
-        await _context.SaveChangesAsync();
-        return Ok("Usuario creado completamente");
-    }
-
-
-    [HttpGet]
-    public async Task<IActionResult> GetBookByDocument(string title)
-    {
-        var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == title);
-        if (book == null)
+        public BookController(AplicationDbContext context)
         {
-            return NotFound("Libro no encontrado ");
-        };
-
-        return Ok(book);
-
-
-    }
-
-    [HttpPut]
-    public async Task<IActionResult> UpdateBook([FromBody] Book updateBook)
-    {
-        var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == updateBook.Title);
-        if (book == null)
-        {
-            return NotFound("Libro no encontrado.");
-
+            _context = context;
         }
-        book.Author = updateBook.Author;
-        book.Category = updateBook.Category;
-        book.Title = updateBook.Title;
-        book.State = updateBook.State;
-        book.ISBN = updateBook.ISBN;
 
-
-        await _context.SaveChangesAsync();
-        return Ok("Libro Actualizado correctamente");
-    }
-
-
-    [HttpDelete]
-    public async Task<IActionResult> DeleteBook(string isbn)
-    {
-        var book = await _context.Books.FirstOrDefaultAsync(b => b.ISBN == isbn);
-        if (book == null)
+        [HttpGet("read")]
+        public IActionResult Read()
         {
-            return NotFound("Libro no encontrado");
+            var books = _context.Books.ToList();
+            return View(books);
         }
-        _context.Books.Remove(book);
-        await _context.SaveChangesAsync();
-        return Ok("Libro eliminado correctamente");
-    }
 
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateBook([FromBody] Book book)
+        {
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
+            return Ok("Libro creado correctamente");
+        }
+
+        [HttpGet("get/{title}")]
+        public async Task<IActionResult> GetBookByTitle(string title)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == title);
+            if (book == null)
+            {
+                return NotFound("Libro no encontrado.");
+            }
+            return Ok(book);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateBook([FromBody] Book updateBook)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == updateBook.Title);
+            if (book == null)
+            {
+                return NotFound("Libro no encontrado.");
+            }
+            book.Author = updateBook.Author;
+            book.Category = updateBook.Category;
+            book.Title = updateBook.Title;
+            book.State = updateBook.State;
+            book.ISBN = updateBook.ISBN;
+
+            await _context.SaveChangesAsync();
+            return Ok("Libro actualizado correctamente.");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteBook(int id)
+        {
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
+            {
+                return NotFound("book not found");
+            }
+
+            _context.Books.Remove(book);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Read));
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> List()
+        {
+            List<Book> list = await _context.Books.ToListAsync();
+            return View(list);
+        }
+    }
 }
