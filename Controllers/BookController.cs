@@ -23,6 +23,10 @@ namespace Library.Controllers;
             _context = context;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
@@ -67,7 +71,7 @@ namespace Library.Controllers;
             await _context.SaveChangesAsync();
             return Ok ("Libro Actualizado correctamente");
         }
-        [HttpDelete]
+        [HttpGet]
         public async Task<IActionResult>DeleteBook(string isbn)
         {
             var book = await _context.Books.FirstOrDefaultAsync(b=> b.ISBN== isbn);
