@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Library.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.DataBase;
@@ -13,5 +14,9 @@ namespace Library.DataBase;
         {
             
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Loan> Loans { get; set; }
         
     }
