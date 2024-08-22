@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Library.Models
-{
+namespace Library.Models;
+
+    [Table("Loans")]
     public class Loan
     {
         public int IdPrestamo { get; set; }
@@ -16,4 +18,3 @@ namespace Library.Models
         public DateTime FinishDate { get; set; }
         public bool State { get; set; }
     }
-}
