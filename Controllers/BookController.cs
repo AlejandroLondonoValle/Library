@@ -35,6 +35,7 @@ namespace Library.Controllers;
         }
 
 
+[HttpGet]
         public async Task<IActionResult> GetBookByDocument(string title)
         {
             var book = await _context.Books.FirstOrDefaultAsync (b=>b.Title== title);
