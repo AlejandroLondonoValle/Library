@@ -23,10 +23,10 @@ public class BookController : Controller
         _context = context;
     }
     public IActionResult Read()
-    {   
-        var book = _context.Books.ToList(); 
+    {
+        var book = _context.Books.ToList();
         return View(book);
-        
+
     }
 
         public IActionResult Index()
