@@ -1,11 +1,51 @@
-@page
+    <div class="container mt-5">
+        <h2>Formulario</h2>
+        <form>
+            <!-- Campo para IdUser -->
+            <div class="mb-3">
+                <label for="idUser" class="form-label">ID Usuario</label>
+                <input type="number" class="form-control" id="idUser" name="idUser" required>
+            </div>
+            
+            <!-- Campo para BookISBN -->
+            <div class="mb-3">
+                <label for="bookISBN" class="form-label">ISBN del Libro</label>
+                <input type="text" class="form-control" id="bookISBN" name="bookISBN" required>
+            </div>
+            
+            <!-- Campo para StartDate -->
+            <div class="mb-3">
+                <label for="startDate" class="form-label">Fecha de Inicio</label>
+                <input type="datetime-local" class="form-control" id="startDate" name="startDate" min="" required>
+            </div>
+            
+            <!-- Campo para FinishDate -->
+            <div class="mb-3">
+                <label for="finishDate" class="form-label">Fecha de Fin</label>
+                <input type="date" class="form-control" id="finishDate" name="finishDate" min="" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>@ViewData["Title"]</h1>
+    <script>
+        // Establecer la fecha mínima para el campo FinishDate y la fecha máxima para el campo StartDate
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date().toISOString().split('T')[0]; // Fecha actual en formato YYYY-MM-DD
+            
+            // Establecer fecha mínima para el campo FinishDate
+            document.getElementById('finishDate').setAttribute('min', today);
 
-<div>
-    
-</div>
+            // Establecer fecha máxima para el campo StartDate
+            const startDateInput = document.getElementById('startDate');
+            startDateInput.setAttribute('min', today + 'T00:00');
+
+            // Actualizar la fecha mínima al cambiar el valor del campo FinishDate
+            document.getElementById('finishDate').addEventListener('change', function () {
+                const finishDate = new Date(this.value).toISOString().split('T')[0];
+                startDateInput.setAttribute('max', finishDate + 'T23:59');
+            });
+        });
+    </script>
