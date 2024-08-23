@@ -21,6 +21,13 @@ public class LoanController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> List()
+    {
+        List<Loan> list = await _context.Loans.ToListAsync();
+        return View(list);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         List<Loan> Index = await _context.Loans.ToListAsync();

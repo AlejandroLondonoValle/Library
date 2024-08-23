@@ -1,0 +1,39 @@
+@model List<Library.Models.Loan>;
+
+<div class="text-center">
+    <h1 class="display-4">¡Estos son los Prestamos Registrados!</h1><br>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Id Prestamo</th>
+                        <th>Id Usuario</th>
+                        <th>ISBN del Libro</th>
+                        <th>Feha de Inicio</th>
+                        <th>Fecha Final</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var loan in Model)
+                    {
+                        <tr>
+                            <td>@loan.IdPrestamo</td>
+                            <td>@loan.IdUserId </td>
+                            <td>@loan.BookISBN</td>
+                            <td>@loan.StartDate</td>
+                            <td>@loan.FinishDate</td>
+                            <td>@loan.State</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>No hay loans para mostrar.</p>
+    }
