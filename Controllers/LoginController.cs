@@ -38,19 +38,31 @@ public class LoginController : Controller
     [HttpPost]
     public async Task<IActionResult> Index(string name, string numberDocument)
     {
-        var user = await _context.Users.SingleOrDefaultAsync(u => u.Name == name && u.NumberDocument == numberDocument);
+        // Convertir los parámetros a minúsculas para facilitar la comparación
+        string lowerName = name.ToLower();
+        string lowerNumberDocument = numberDocument.ToLower();
 
-        // Lógica de autenticación
+        // Buscar el usuario en la base de datos
+        var user = await _context.Users
+                                 .SingleOrDefaultAsync(u => u.Name.ToLower() == lowerName
+                                                         && u.NumberDocument.ToLower() == lowerNumberDocument);
+
+        // Verificar si el usuario existe y redirigir según su rol
         if (user != null)
         {
-            // Redirige a otra acción o vista si la autenticación es exitosa
-            return RedirectToAction("Dashboard");
+            if (user.Role.ToLower() == "administrador")
+            {
+                return RedirectToAction("Dashboard");
+            }
+            else if (user.Role.ToLower() == "usuario")
+            {
+                return Redirect("/books/read");
+            }
         }
-        else
-        {
-            ViewBag.Error = "Credenciales incorrectas.";
-            return View();
-        }
+
+        // Si no se encuentra el usuario o las credenciales son incorrectas
+        ViewBag.Error = "Credenciales incorrectas.";
+        return View();
     }
 
     // GET: /Login/Error
