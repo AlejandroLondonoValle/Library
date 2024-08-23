@@ -1,0 +1,41 @@
+@model Library.Models.Book
+
+<div class="text-center">
+    <h1 class="display-4">Editar Libro</h1><br>
+
+    <form asp-controller="Book" asp-action="UpdateBook" method="post" class="row g-3">
+        <input type="hidden" asp-for="@Model.Id" />
+        <div class="col-md-6">
+            <label for="validationDefault02" class="form-label">ISBN</label>
+            <input type="text" class="form-control" asp-for="@Model.ISBN" id="validationDefault02" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault02" class="form-label">Titulo</label>
+            <input type="text" class="form-control" asp-for="@Model.Title" id="validationDefault02" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Autor</label>
+            <input type="text" class="form-control" asp-for="@Model.Author" id="validationDefault03" required
+                placeholder="Ingrese el tipo de Documento del Usuario">
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Categoria</label>
+            <input type="text" class="form-control" asp-for="@Model.Category" id="validationDefault03" required
+                placeholder="Ingrese el tipo de Documento del Usuario">
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault04" class="form-label">Estado</label>
+            <select class="form-select" asp-for="@Model.State" id="validationDefault04" required>
+                <option selected disabled>Elige...</option>
+                <option value="True">Disponible</option>
+                <option value="False">Agotado</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Guardar Libro</button>
+            <a class="btn btn-secondary" asp-controller="Book" asp-action="Read">Volver</a>
+        </div>
+    </form>
+
+
+</div>
