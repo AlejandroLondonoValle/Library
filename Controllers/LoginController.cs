@@ -58,6 +58,11 @@ public class LoginController : Controller
             {
                 return Redirect("/user/dashboard");
             }
+            else if (user.Role.ToLower() == "empleado")
+            {
+                return Redirect("/employee/employee");
+            }
+
         }
 
         // Si no se encuentra el usuario o las credenciales son incorrectas
