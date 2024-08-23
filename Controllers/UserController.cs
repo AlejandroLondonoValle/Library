@@ -70,41 +70,6 @@ namespace Library.Controllers
             return Ok(user);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> UpdateUser(int id)
-        {
-            User user = await _context.Users.FirstAsync(u => u.Id == id);
-            return View(user);
-        }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdateUser(User user)
-        {
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Dashboard));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Dashboard));
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> List()
-        {
-            List<User> list = await _context.Users.ToListAsync();
-            return View(list);
-        }
     }
 }
