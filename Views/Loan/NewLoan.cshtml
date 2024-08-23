@@ -3,14 +3,10 @@
 <div class="container mt-5">
     <h2>Formulario</h2>
     <form asp-controller="Loan" asp-action="NewLoan" method="post" class="row g-3">
-
+        <input type="hidden" asp-for="@Model.BookISBN" />
         <div class="col-md-6">
             <label for="idUser" class="form-label">ID Usuario</label>
             <input type="number" class="form-control" asp-for="@Model.IdUserId" id="idUser" name="idUser" required>
-        </div>
-        <div class="col-md-6">
-            <label for="bookISBN" class="form-label">ISBN del Libro</label>
-            <input type="text" class="form-control" asp-for="@Model.BookISBN" id="bookISBN" name="bookISBN" required>
         </div>
         <div class="col-md-6">
             <label for="startDate" class="form-label">Fecha de Inicio</label>
