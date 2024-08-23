@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Library.Controllers;
 
-[Route("[controller]")]
 public class LoanController : Controller
 {
     private readonly AplicationDbContext _context;
@@ -21,71 +20,30 @@ public class LoanController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        List<Loan> Index = await _context.Loans.ToListAsync();
+        return View(Index);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [HttpGet]
+    public IActionResult NewLoan()
     {
-        return View("Error!");
+        var loan = new Loan(); // Crear una instancia de Loan
+        return View(loan); // Pasar la instancia a la vista
     }
+
 
     [HttpPost]
-    public async Task<IActionResult> CreateLoan([FromBody] Loan loan)
+    public async Task<IActionResult> NewLoan(Loan loan)
     {
-        _context.Loans.Add(loan);
+        await _context.Loans.AddAsync(loan);
         await _context.SaveChangesAsync();
-        return Ok("Prestamo generado correctamente");
-
-    }
-    [HttpGet]
-    public async Task<IActionResult> GetLoanById(int id)
-    {
-        var loan = await _context.Loans.FirstOrDefaultAsync(l => l.IdPrestamo == id);
-        if (loan == null)
-        {
-            return NotFound("Prestamo no encontrado");
-        }
-
-        return Ok(loan);
+        return RedirectToAction(nameof(Index));
     }
 
-    [HttpPut]
 
-    public async Task<IActionResult> UpdateLoan([FromBody] Loan updateLoan)
-    {
-        var loan = await _context.Loans.FirstOrDefaultAsync(l => l.IdPrestamo == updateLoan.IdPrestamo);
-        if (loan == null)
-        {
-            return NotFound("Prestamo no encontrado");
-
-        }
-
-        loan.State = updateLoan.State;
-        loan.BookISBN = updateLoan.BookISBN;
-        loan.IdUser = updateLoan.IdUser;
-        loan.StartDate = updateLoan.StartDate;
-        loan.FinishDate = updateLoan.FinishDate;
-
-
-        await _context.SaveChangesAsync();
-        return Ok("Prestamo Actualizado correctamente");
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> Deleteloan(int id)
-    {
-        var loan = await _context.Loans.FindAsync(id);
-        if (loan == null)
-        {
-            return NotFound("Libro no encontrado");
-        }
-        _context.Loans.Remove(loan);
-        await _context.SaveChangesAsync();
-        return Ok("Prestamo eliminado correctamente");
-    }
 
 }
 
