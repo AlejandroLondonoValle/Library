@@ -19,6 +19,12 @@ namespace Library.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            var books = _context.Books.ToList();
+            return View(books);
+        }
 
         // GET: /User/Index
         [HttpGet]
@@ -27,12 +33,6 @@ namespace Library.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Dashboard()
-        {
-            var user = _context.Users.ToList();
-            return View(user);
-        }
 
         // POST: /User/Index
         [HttpPost]
@@ -70,6 +70,12 @@ namespace Library.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            List<Book> list = await _context.Books.ToListAsync();
+            return View(list);
+        }
 
     }
 }
