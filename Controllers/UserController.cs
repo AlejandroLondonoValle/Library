@@ -33,7 +33,6 @@ namespace Library.Controllers
             return View();
         }
 
-
         // POST: /User/Index
         [HttpPost]
         public IActionResult Index(string correo, string clave)
