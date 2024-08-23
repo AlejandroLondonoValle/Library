@@ -1,0 +1,45 @@
+@model Library.Models.User
+
+<div class="text-center">
+    <h1 class="display-4">Editar Usuario</h1><br>
+
+    <form asp-controller="User" asp-action="UpdateUser" method="post" class="row g-3">
+        <input type="hidden" asp-for="@Model.Id" />
+        <div class="col-md-6">
+            <label for="validationDefault01" class="form-label">Nombre</label>
+            <input type="text" class="form-control" asp-for="@Model.Name" id="validationDefault01" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault02" class="form-label">Apellido</label>
+            <input type="text" class="form-control" asp-for="@Model.LastName" id="validationDefault02" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Tipo de Documento</label>
+            <input type="text" class="form-control" asp-for="@Model.TypeDocument" id="validationDefault03" required
+                placeholder="Ingrese el tipo de Documento del Usuario">
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Numero de Documento</label>
+            <input type="text" class="form-control" asp-for="@Model.NumberDocument" id="validationDefault03" required
+                placeholder="Ingrese el Numero de Documento del Usuario">
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault05" class="form-label">Direccion</label>
+            <input type="text" class="form-control" asp-for="@Model.Address" id="validationDefault05" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Numero de Telefono</label>
+            <input type="text" class="form-control" asp-for="@Model.PhoneNumber" id="validationDefault03" required>
+        </div>
+        <div class="col-md-6">
+            <label for="validationDefault03" class="form-label">Rol</label>
+            <input type="text" class="form-control" asp-for="@Model.Role" id="validationDefault03" required>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Guardar Usuario</button>
+            <a class="btn btn-secondary" asp-controller="User" asp-action="Dashboard">Volver</a>
+        </div>
+    </form>
+
+
+</div>

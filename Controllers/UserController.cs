@@ -70,21 +70,19 @@ namespace Library.Controllers
             return Ok(user);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody] User updateUser)
+        [HttpGet]
+        public async Task<IActionResult> UpdateUser(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.NumberDocument == updateUser.NumberDocument);
+            User user = await _context.Users.FirstAsync(u => u.Id == id);
+            return View(user);
+        }
 
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            user.Address = updateUser.Address;
-            user.PhoneNumber = updateUser.PhoneNumber;
-
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(User user)
+        {
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
-            return Ok("User updated successfully");
+            return RedirectToAction(nameof(Dashboard));
         }
 
         [HttpGet]

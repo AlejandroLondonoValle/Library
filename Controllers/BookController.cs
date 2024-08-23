@@ -6,6 +6,7 @@ using Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Library.Controllers
 {
     [Route("books")] // Ruta base para todas las acciones
@@ -44,25 +45,28 @@ namespace Library.Controllers
             return Ok(book);
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateBook([FromBody] Book updateBook)
+        // GET: /books/update/{id}
+        [HttpGet("update/{id}")]
+        public async Task<IActionResult> UpdateBook(int id)
         {
-            var book = await _context.Books.FirstOrDefaultAsync(b => b.Title == updateBook.Title);
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
             if (book == null)
             {
                 return NotFound("Libro no encontrado.");
             }
-            book.Author = updateBook.Author;
-            book.Category = updateBook.Category;
-            book.Title = updateBook.Title;
-            book.State = updateBook.State;
-            book.ISBN = updateBook.ISBN;
-
-            await _context.SaveChangesAsync();
-            return Ok("Libro actualizado correctamente.");
+            return View(book); // Asegúrate de que esta vista muestre el formulario correcto
         }
 
-        [HttpGet]
+        [HttpPost]
+        public async Task<IActionResult> UpdateBook(Book book)
+        {
+            _context.Books.Update(book);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Read)); // Cambiado a Read
+        }
+
+        // GET: /books/delete/{id}
+        [HttpGet("delete/{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
             var book = await _context.Books.FindAsync(id);
@@ -84,3 +88,7 @@ namespace Library.Controllers
         }
     }
 }
+
+
+
+
