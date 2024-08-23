@@ -36,7 +36,7 @@ public class LoginController : Controller
 
     // POST: /Login/Index
     [HttpPost]
-    public async Task<IActionResult> Index(string name, string numberDocument, string password)
+    public async Task<IActionResult> Index(string name, string numberDocument)
     {
         var user = await _context.Users.SingleOrDefaultAsync(u => u.Name == name && u.NumberDocument == numberDocument);
 
