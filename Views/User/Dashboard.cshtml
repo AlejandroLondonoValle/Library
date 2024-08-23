@@ -1,7 +1,8 @@
-@model List<Library.Models.User>;
+<div>
+@model List<Library.Models.Book>;
 
 <div class="text-center">
-    <h1 class="display-4">¡Estos son los Usuarios Registrados!</h1><br>
+    <h1 class="display-4">¡Estos son los libros que puedes reservar!</h1><br>
 
     @if (Model != null && Model.Any())
     {
@@ -10,27 +11,26 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nombre Completo</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
-                        <th>Número de Documento</th>
-                        <th>Rol</th>
+                        <th>ISBN</th>
+                        <th>Titulo</th>
+                        <th>Autor</th>
+                        <th>Categoria</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in Model)
+                    @foreach (var book in Model)
                     {
                         <tr>
-                            <td>@user.Id</td>
-                            <td>@user.Name @user.LastName</td>
-                            <td>@user.Address</td>
-                            <td>@user.PhoneNumber</td>
-                            <td>@user.NumberDocument</td>
-                            <td>@user.Role</td>
+                            <td>@book.Id</td>
+                            <td>@book.ISBN</td>
+                            <td>@book.Title</td>
+                            <td>@book.Author</td>
+                            <td>@book.Category</td>
+                            <td>@book.State</td>
                             <td>
-                                <a class="btn btn-warning btn-sm" asp-controller="User" asp-action="UpdateUser" asp-route-id="@user.Id">Editar</a>
-                                <a class="btn btn-danger btn-sm" asp-controller="User" asp-action="DeleteUser" asp-route-id="@user.Id" onclick="return confirmar()">Eliminar</a>
+                                <p>Aqui se reservara</p>
                             </td>
                         </tr>
                     }
@@ -40,14 +40,6 @@
     }
     else
     {
-        <p>No hay usuarios para mostrar.</p>
+        <p>No hay Libros para mostrar.</p>
     }
-
-@section Scripts {
-    <script>
-        function confirmar() {
-            return confirm("¿Estás seguro de Eliminar este user?");
-        }
-    </script>
-}
- 
+</div>

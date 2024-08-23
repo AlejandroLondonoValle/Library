@@ -19,6 +19,12 @@ namespace Library.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            var books = _context.Books.ToList();
+            return View(books);
+        }
 
         // GET: /User/Index
         [HttpGet]
@@ -27,12 +33,6 @@ namespace Library.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Dashboard()
-        {
-            var user = _context.Users.ToList();
-            return View(user);
-        }
 
         // POST: /User/Index
         [HttpPost]
@@ -71,40 +71,11 @@ namespace Library.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdateUser(int id)
-        {
-            User user = await _context.Users.FirstAsync(u => u.Id == id);
-            return View(user);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UpdateUser(User user)
-        {
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Dashboard));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound("User not found");
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Dashboard));
-        }
-
-
-        [HttpGet]
         public async Task<IActionResult> List()
         {
-            List<User> list = await _context.Users.ToListAsync();
+            List<Book> list = await _context.Books.ToListAsync();
             return View(list);
         }
+
     }
 }
