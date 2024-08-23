@@ -5,7 +5,7 @@
 
     <form asp-controller="Book" asp-action="UpdateBook" method="post" class="row g-3">
         <input type="hidden" asp-for="@Model.Id" />
-        <div class="col-md-6">
+         <div class="col-md-6">
             <label for="validationDefault01" class="form-label">ISBN</label>
             <input type="text" class="form-control" asp-for="@Model.ISBN" id="validationDefault01" required>
         </div>

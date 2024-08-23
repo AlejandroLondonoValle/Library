@@ -6,6 +6,7 @@ using Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Library.Controllers
 {
     [Route("books")] // Ruta base para todas las acciones
@@ -48,17 +49,20 @@ namespace Library.Controllers
         [HttpGet("update/{id}")]
         public async Task<IActionResult> UpdateBook(int id)
         {
-            Book book = await _context.Books.FirstAsync(l => l.Id == id);
-            return View(book);
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound("Libro no encontrado.");
+            }
+            return View(book); // Asegúrate de que esta vista muestre el formulario correcto
         }
 
-        // POST: /books/update
-        [HttpPost("update")]
+        [HttpPost]
         public async Task<IActionResult> UpdateBook(Book book)
         {
             _context.Books.Update(book);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Read));
+            return RedirectToAction(nameof(Read)); // Cambiado a Read
         }
 
         // GET: /books/delete/{id}
