@@ -45,16 +45,11 @@ namespace Library.Controllers
             return Ok(book);
         }
 
-        // GET: /books/update/{id}
-        [HttpGet("update/{id}")]
+        [HttpGet]
         public async Task<IActionResult> UpdateBook(int id)
         {
-            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
-            if (book == null)
-            {
-                return NotFound("Libro no encontrado.");
-            }
-            return View(book); // Asegúrate de que esta vista muestre el formulario correcto
+            Book book = await _context.Books.FirstAsync(b => b.Id == id);
+            return View(book);
         }
 
         [HttpPost]
@@ -62,8 +57,9 @@ namespace Library.Controllers
         {
             _context.Books.Update(book);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Read)); // Cambiado a Read
+            return RedirectToAction(nameof(Read));
         }
+
 
         // GET: /books/delete/{id}
         [HttpGet("delete/{id}")]
