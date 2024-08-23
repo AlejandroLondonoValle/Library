@@ -30,7 +30,7 @@
                             <td>@book.Category</td>
                             <td>@book.State</td>
                             <td>
-                                <p>Aqui se reservara</p>
+                                <a class="btn btn-success btn-sm" asp-controller="Loan" asp-action="NewLoan" asp-route-id="@book.ISBN">Reservar</a>
                             </td>
                         </tr>
                     }

@@ -56,7 +56,7 @@ public class LoginController : Controller
             }
             else if (user.Role.ToLower() == "usuario")
             {
-                return Redirect("/books/read");
+                return Redirect("/user/dashboard");
             }
         }
 
