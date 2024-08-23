@@ -5,28 +5,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Library.DataBase;
 
 namespace Library.Controllers
 {
-    [Route("[controller]")]
+ 
     public class EmployeeController : Controller
     {
-        private readonly ILogger<EmployeeController> _logger;
+        private readonly AplicationDbContext _context;
 
-        public EmployeeController(ILogger<EmployeeController> logger)
+           public EmployeeController(AplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Employee()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
+   
     }
 }
